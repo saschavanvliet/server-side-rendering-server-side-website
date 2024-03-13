@@ -2,6 +2,7 @@
   --background-color: #F9CDC8;
   --primary-color: black;
   --secundary-color: #F6F6F4;
+  --theme-color: #D51A22;
   --font-family: 'Dancing Script', sans-serif;
   --font-size: 14px;
 }
@@ -19,6 +20,11 @@ nav {
   height: auto;
 }
 
+.navlogo :hover {
+  scale: 1.1;
+  transition: scale 100ms ease-in-out;
+}
+
 ul {
   list-style-type: none;
   display: list-item;
@@ -26,9 +32,14 @@ ul {
 }
 
 nav a{
-  text-decoration: none;
+  text-decoration: solid transparent;
   cursor: pointer;
   color: var(--primary-color);
+}
+
+ul :hover {
+  color: var(--theme-color);
+  text-decoration: underline, var(--theme-color);
 }
 
 body {
