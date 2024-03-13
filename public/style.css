@@ -1,0 +1,158 @@
+:root {
+  --background-color: #F9CDC8;
+  --primary-color: black;
+  --secundary-color: #F6F6F4;
+  --font-family: 'Dancing Script', sans-serif;
+  --font-size: 14px;
+}
+
+nav {
+  background-color: var(--secundary-color);
+}
+
+.navlogo img {
+  margin-top: 2%;
+  margin-bottom: 2%;
+  margin-left: 2%;
+  width: 20%;
+  min-width: 10em;
+  height: auto;
+}
+
+ul {
+  list-style-type: none;
+  display: list-item;
+  margin: 2%;
+}
+
+nav a{
+  text-decoration: none;
+  cursor: pointer;
+  color: var(--primary-color);
+}
+
+body {
+  background-color: var(--background-color);
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden; /*Geen overflow op de x-as! */
+  overflow-y: auto;
+}
+
+main {
+  display: flex;
+  flex-direction: column;
+}
+
+/* Media queries voor verschillende groottes */
+@media only screen and (min-width: 630px) {
+
+  nav {
+    position: fixed;
+    display: flex;
+    align-items: center;
+    width: 100%;
+  }
+
+  nav a {
+    margin: auto;
+    margin-left: 1em;
+    margin-right: 1em;
+  }
+
+  .navlogo img {
+    margin-top: 2%;
+    margin-bottom: 2%;
+    margin-left: 2%;
+    width: 20%;
+    min-width: 10em;
+    height: auto;
+    cursor: pointer;
+  }
+
+  ul {
+    list-style-type: none;
+    display: flex;
+    margin: 2%;
+  }
+
+  main {
+    display: grid;
+    grid-template-columns: 1fr 1fr; /*Grid met twee kolommen*/
+    background-color: lightblue;
+    justify-content: center;
+  }
+
+  button {
+    /*De button wordt naar boven verplaatst*/
+    position: fixed;
+    top: 1em;
+    left: 1em;
+  }
+}
+
+.dropdown-menu {
+  display: none;
+  opacity: 0;
+  height: 0;
+  overflow: hidden;
+  top: 4.9em;
+  left: 0;
+  background-color: #001717;
+  padding: 0;
+}
+
+.active {
+  display: block;
+  height: auto;
+  margin-top: 6em;
+  margin-bottom: -6em;
+  animation-name: opacity;
+  animation-duration: 0.3s;
+  opacity: 100%;
+}
+
+@media only screen and (min-width: 900px) {
+  main {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    /*Grid met drie kolommen*/
+    background-color: lightblue;
+  }
+}
+
+/* Zodat de tekst niet in beeld is voordat je er op drukt */
+p {
+  display: none;
+}
+
+.hoi {
+  /*Het berichtje dat tevoorschijn komt met achtergrond als je op de button klikt*/
+  width: 100%;
+  padding: 25px;
+  background-color: rgb(108, 149, 220);
+  color: white;
+  font-size: 25px;
+  box-sizing: border-box;
+  display: block;
+}
+
+.hover-images {
+  transition: scale 0.3s
+    /*Smoothere transition van de hover!*/
+}
+
+.hover-images:hover {
+  scale: 1.5;
+  /*Grootte wordt veranderd als je over de personen images heenkomt*/
+}
+
+@media only screen and (min-width: 1200px) {
+  main {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    /*Grid met vier kolommen*/
+    background-color: lightgreen;
+  }
+}
