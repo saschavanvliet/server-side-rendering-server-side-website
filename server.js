@@ -5,10 +5,12 @@ import express from 'express'
 import fetchJson from './helpers/fetch-json.js'
 
 // Stel het basis endpoint in
-const apiUrl = 'https://fdnd.directus.app/items'
+const apiUrl = 'https://redpers.nl/wp-json/wp/v2'
 
 // Haal alle squads uit de WHOIS API op
-const squadData = await fetchJson(apiUrl + '/squad')
+const apiPosts = apiUrl + '/posts'
+const apiUsers = apiUrl + '/users'
+const apiCategories = apiUrl + '/categories'
 
 // Maak een nieuwe express app aan
 const app = express()
@@ -22,15 +24,17 @@ app.set('views', './views')
 // Gebruik de map 'public' voor statische resources, zoals stylesheets, afbeeldingen en client-side JavaScript
 app.use(express.static('public'))
 
+app.use(express.urlencoded({ extended: true }))
+
 // Maak een GET route voor de index
 app.get('/', function (request, response) {
   // Haal alle personen uit de WHOIS API op
-  fetchJson(apiUrl + '/person').then((apiData) => {
+  fetchJson(apiPosts).then((apiData) => {
     // apiData bevat gegevens van alle personen uit alle squads
     // Je zou dat hier kunnen filteren, sorteren, of zelfs aanpassen, voordat je het doorgeeft aan de view
 
     // Render index.ejs uit de views map en geef de opgehaalde data mee als variabele, genaamd persons
-    response.render('index', {persons: apiData.data, squads: squadData.data})
+    response.render('home.ejs', {articles: apiData})
   })
 })
 
@@ -40,13 +44,46 @@ app.post('/', function (request, response) {
   response.redirect(303, '/')
 })
 
-// Maak een GET route voor een detailpagina met een request parameter id
-app.get('/person/:id', function (request, response) {
-  // Gebruik de request parameter id en haal de juiste persoon uit de WHOIS API op
-  fetchJson(apiUrl + '/person/' + request.params.id).then((apiData) => {
-    // Render person.ejs uit de views map en geef de opgehaalde data mee als variable, genaamd person
-    response.render('person', {person: apiData.data, squads: squadData.data})
+app.get('/artikel/:slug', function (request, response) {
+ 
+  // Hier haal je de url op en maak je er een
+  // Json file van ipv een link. Waarna
+  // het wordt vernoemd naar apiData
+  fetchJson(apiPosts + '?slug=' + request.params.slug).then((apiData) => {
+ 
+      // Deze info wordt daarna
+      // meegegeven aan de toegewezen EJS
+      response.render('article.ejs', {
+        // .data is belangrijk om er bij te schrijven
+        // alle id's zijn een soort van mappen, en door .data te schrijven ga je eigenlijk een map 'dieper'
+          article: apiData
+    })
+      // console.log(apiData)
   })
+})
+
+// Stap 4 | Het maken van categorieeen in routes
+const categoryRoutes = [
+  'binnenland',
+  'buitenland',
+  'column',
+  'economie',
+  'kunst & media',
+  'podcast',
+  'politiek',
+  'wetenschap'
+]
+//  https://redpers.nl/wp-json/wp/v2/posts?filter=[articleSection]=%22binnenland%22
+categoryRoutes.forEach(category => {
+  app.get("/" + category, function (request, response) {
+      fetchJson(apiCategories + "?filter=" + category).then((categoryApi) => {
+
+        // Kijken of alle goede dat is binnengekomen
+        // console.log(categoryApi)
+
+        response.render('category.ejs')
+    });
+  });
 })
 
 // Stel het poortnummer in waar express op moet gaan luisteren
