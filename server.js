@@ -26,8 +26,8 @@ app.use(express.static('public'))
 
 app.use(express.urlencoded({ extended: true }))
 
-// Maak een GET route voor de index
-app.get('/', function (request, response) {
+// Maak een GET route voor de index (home)
+app.get('/', function (_request, response) {
   // Haal alle personen uit de WHOIS API op
   fetchJson(apiPosts).then((apiData) => {
     // apiData bevat gegevens van alle personen uit alle squads
@@ -38,7 +38,7 @@ app.get('/', function (request, response) {
   })
 })
 
-// Maak een POST route voor de index
+// Maak een POST route voor de index (home)
 app.post('/', function (request, response) {
   // Er is nog geen afhandeling van POST, redirect naar GET op /
   response.redirect(303, '/')
@@ -53,10 +53,9 @@ app.get('/artikel/:slug', function (request, response) {
  
       // Deze info wordt daarna
       // meegegeven aan de toegewezen EJS
-      response.render('article.ejs', {
+      response.render('article.ejs', {article: apiData
         // .data is belangrijk om er bij te schrijven
         // alle id's zijn een soort van mappen, en door .data te schrijven ga je eigenlijk een map 'dieper'
-          article: apiData
     })
       // console.log(apiData)
   })
@@ -94,4 +93,3 @@ app.listen(app.get('port'), function () {
   // Toon een bericht in de console en geef het poortnummer door
   console.log(`Application started on http://localhost:${app.get('port')}`)
 })
-

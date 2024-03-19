@@ -1,7 +1,7 @@
 <%- include('./partials/head') %>
 <body>
   <header>
-    <nav>
+    <nav id="navbar">
       <div class="navlogo">
       <a href="https://redpers.nl/"><img src="assets/RedPers_Logo_Cmyk_Black.webp" alt="Logo Redpers" width="400px" height="96px">
       </a>
@@ -16,18 +16,23 @@
     </nav>
   </header>
   <main>
+    <ul class="home-articles">
+      <% articles.forEach(article => {
+            { %>
+            <article>
+              <section>
+              <a href="/artikel/<%=article.id%>">
+              <a href="/artikel/<%=article.slug%>">
+                <img src="<%=article.jetpack_featured_media_url%>">
+                <h2><%-article.title.rendered%></h2>
+                  <h3><%=article.yoast_head_json.author%>&nbsp;<span class="leestijd-articles"> - 3 min</span></h3>
+              </a>
+              </section>
+              %>
+            </article>
+          <% }
+        }) %>
+  </ul>
   </main>
 </body>
-
-<!-- 
-<div>
-<article>
-<ul>
-  <% persons.forEach(person => { %>
-    <li><a href="./person/<%= person.id %>"><%= person.name %></a>, squad_id <%= person.squad_id %></li>
-  <% }) %>
-</ul>
-</article>
-</div> -->
-
   <%- include('./partials/foot') %>
