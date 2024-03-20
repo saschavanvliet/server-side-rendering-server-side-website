@@ -69,7 +69,6 @@ body {
   margin: 0;
   padding: 0;
   overflow-x: hidden; /*Geen overflow op de x-as! */
-
 }
 
 article {
@@ -85,9 +84,23 @@ article {
   margin: 1em;
 }
 
+a {
+  text-decoration: none;
+}
+
+section a :hover {
+  text-decoration: underline;
+  font-style: italic;
+  color: var(--theme-color);
+}
+
 img {
   width: 25em;
   height: auto;
+}
+
+main {
+  width: 100%;
 }
 
 /* Media queries voor verschillende groottes */
