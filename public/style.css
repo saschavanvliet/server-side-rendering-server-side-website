@@ -99,10 +99,6 @@ img {
   height: auto;
 }
 
-main {
-  width: 100%;
-}
-
 /* Media queries voor verschillende groottes */
 @media only screen and (min-width: 900px) {
   .home-articles {

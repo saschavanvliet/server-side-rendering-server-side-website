@@ -47,8 +47,7 @@ app.post('/', function (request, response) {
 app.get('/artikel/:slug', function (request, response) {
  
   // Hier haal je de url op en maak je er een
-  // Json file van ipv een link. Waarna
-  // het wordt vernoemd naar apiData
+  // Json file van ipv een link. Waarna het wordt vernoemd naar apiData
   fetchJson(apiPosts + '?slug=' + request.params.slug).then((apiData) => {
  
       // Deze info wordt daarna
