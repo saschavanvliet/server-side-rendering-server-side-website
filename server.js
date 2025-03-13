@@ -6,12 +6,23 @@ import express from 'express'
 import { Liquid } from 'liquidjs';
 
 
-console.log('Hieronder moet je waarschijnlijk nog wat veranderen')
+console.log('Heet je echt zo??')
 // Doe een fetch naar de data die je nodig hebt
 // const apiResponse = await fetch('...')
 
 // Lees van de response van die fetch het JSON object in, waar we iets mee kunnen doen
 // const apiResponseJSON = await apiResponse.json()
+
+// Controleer eventueel de data in je console
+// (Let op: dit is _niet_ de console van je browser, maar van NodeJS, in je terminal)
+// console.log(apiResponseJSON)
+
+// Doe een fetch naar de data die je nodig hebt
+const stekjesResponse = await fetch('https://fdnd-agency.directus.app/items/bib_stekjes')
+const stekjesResponseJSON = await stekjesResponse.json()
+
+const plaatjesResponse = await fetch('https://fdnd-agency.directus.app/items/bib_afbeeldingen?filter={%20%22type%22:%20{%20%22_eq%22:%20%22stekjes%22%20}}')
+const plaatjesResponseJSON = await plaatjesResponse.json()
 
 // Controleer eventueel de data in je console
 // (Let op: dit is _niet_ de console van je browser, maar van NodeJS, in je terminal)
@@ -37,8 +48,52 @@ app.set('views', './views')
 app.get('/', async function (request, response) {
    // Render index.liquid uit de Views map
    // Geef hier eventueel data aan mee
-   response.render('index.liquid')
+ response.render('index.liquid', {
+  stekjes: stekjesResponseJSON.data,
+  plaatjes: plaatjesResponseJSON.data
+ })
 })
+
+app.get('/stekjes', async function (request, response) {
+  // Render index.liquid uit de Views map
+  // Geef hier eventueel data aan mee
+response.render('stekjes.liquid', {
+ stekjes: stekjesResponseJSON.data,
+ plaatjes: plaatjesResponseJSON.data
+})
+})
+
+app.get('/stekjes/:id', async function (request, response) {
+const stekjeId = request.params.id;
+const stekjeResponse = await fetch(`https://fdnd-agency.directus.app/items/bib_stekjes/${stekjeId}`);
+const stekjeData = await stekjeResponse.json();
+
+response.render('stekjes.liquid', { stekje: stekjeData.data });
+});
+
+app.get('/agenda', async function (request, response) {
+  // Render index.liquid uit de Views map
+  // Geef hier eventueel data aan mee
+response.render('agenda.liquid', {
+})})
+
+app.get('/', async function (request, response) {
+  // Render index.liquid uit de Views map
+  // Geef hier eventueel data aan mee
+response.render('partners.liquid', {
+})})
+
+app.get('/', async function (request, response) {
+  // Render index.liquid uit de Views map
+  // Geef hier eventueel data aan mee
+response.render('over.liquid', {
+})})
+
+app.get('/', async function (request, response) {
+  // Render index.liquid uit de Views map
+  // Geef hier eventueel data aan mee
+response.render('contact.liquid', {
+})})
 
 // Maak een POST route voor de index; hiermee kun je bijvoorbeeld formulieren afvangen
 // Hier doen we nu nog niets mee, maar je kunt er mee spelen als je wilt
@@ -46,6 +101,14 @@ app.post('/', async function (request, response) {
   // Je zou hier data kunnen opslaan, of veranderen, of wat je maar wilt
   // Er is nog geen afhandeling van een POST, dus stuur de bezoeker terug naar /
   response.redirect(303, '/')
+})
+
+app.get('/404', async function (request, response) {
+  response.render('404.liquid')
+})
+
+app.use((req, res, next) => {
+  res.status(404).render('404.liquid')
 })
 
 // Stel het poortnummer in waar Express op moet gaan luisteren

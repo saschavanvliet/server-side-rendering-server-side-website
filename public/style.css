@@ -1,0 +1,24 @@
+html, body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    overflow-x: hidden; /* voorkomt horizontale scroll */
+}
+
+
+.plaatjes-index {
+   width: 300px;
+}
+
+
+footer {
+    background: var(--primary-color-beige);
+}
+
+nav {
+    background: var(--primary-color-green);
+}
+
+.body-stekjes {
+    background: var(--primary-color-beige);
+}
