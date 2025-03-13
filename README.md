@@ -33,7 +33,8 @@
 
 #### Wie is de opdrachtgever?
 - **Bieb in Bloei (BiB)** is een sociaal groenproject dat is bedacht, opgezet en uitgevoerd door studenten van Living Lab Buurtcampus Oost (HvA) voor en met buurtbewoners in Amsterdam Oost, in samenwerking met OBA Linnaeus.
-- Het is een **digitaal platform** dat een overzicht biedt van duurzame projecten die zijn opgesteld door de Buurtcampus Oost. 
+- Het is een **fysieke ontmoetingsplek** met een vast programma dat gaat draaien vanaf 26 maart, met een ondersteunende website die in de hoek ook op een pc staat voor bezoekers van de bieb.
+- De website biedt een overzicht van duurzame projecten die zijn opgesteld door de Buurtcampus Oost. 
   - **Doel:** Samen de buurt duurzamer, gezonder en inclusiever maken. 
   - **Voorbeelden van projecten:** De Stekjes Bieb, De Zadenbieb en de Geveltuin.
 - **Bieb in Bloei-hoek** in de bibliotheek van Amsterdam biedt informatie over alles wat te maken heeft met groen, zoals planten/stekjes ruilen, zonnepanelen laten plaatsen, zaden ruilen en boeken lezen over duurzaamheid.
